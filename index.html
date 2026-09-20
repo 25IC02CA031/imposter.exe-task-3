@@ -1,8 +1,3 @@
-<!--
-MAAZ MAHMEDBHAI BELIM
-25IC02CA031
-Imposter.exe - Electrical
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -132,94 +127,12 @@ Imposter.exe - Electrical
             <!-- Electrical Theme Caption -->
             <p>Task finished. Trust index increased by 0.1%.<br>Proceed with caution.</p>
             
-            <button class="download-btn" onclick="downloadProof()">Download Proof</button>
+            <button class="download-btn">Take a screenshot</button>
         </div>
 
         <!-- Bottom Caution Stripes -->
         <div class="hazard-stripes"></div>
     </div>
 
-    <script>
-
-        function downloadProof(){
-            var b=document.querySelector('.download-btn');
-            var t=b.innerText;
-
-            b.innerText="EXTRACTING...";
-            b.style.backgroundColor="#ffcc00";
-            b.style.color="#000";
-            b.style.boxShadow="0 6px 0 #b38f00";
-
-            setTimeout(()=>{
-                var c=document.createElement('canvas');
-                c.width=650;
-                c.height=450;
-                var x=c.getContext('2d');
-
-                x.fillStyle='#151515';
-                x.fillRect(0,0,c.width,c.height);
-
-                x.strokeStyle='#444444';
-                x.lineWidth=12;
-                x.strokeRect(6,6,c.width-12,c.height-12);
-
-                function drawHazardStripes(y){
-                    x.fillStyle='#ffcc00';
-                    x.fillRect(10,y,c.width-20,30);
-
-                    x.fillStyle='#111111';
-
-                    for(var i=-50;i<c.width;i+=40){
-                        x.beginPath();
-                        x.moveTo(i,y);
-                        x.lineTo(i+20,y);
-                        x.lineTo(i+50,y+30);
-                        x.lineTo(i+30,y+30);
-                        x.fill();
-                    }
-
-                }
-
-                drawHazardStripes(10);
-                drawHazardStripes(c.height-40);
-
-                x.textAlign='center';
-
-                x.font='bold 55px "Courier New", Courier, monospace';
-                x.fillStyle='#ffcc00';
-                x.fillText('IMPOSTER.EXE',c.width/2,150);
-
-                x.font='bold 35px "Courier New", Courier, monospace';
-                x.fillStyle='#33ccff';
-                x.fillText('Task Completed',c.width/2,230);
-
-                x.font='22px "Courier New", Courier, monospace';
-                x.fillStyle='#a0a0a0';
-                x.fillText('Task finished. Trust index increased by 0.1%.',c.width/2,310);
-                x.fillText('Proceed with caution.',c.width/2,345);
-
-                var a=document.createElement('a');
-                a.download='Electrical_Task_Proof.png';
-                a.href=c.toDataURL('image/png');
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-
-                b.innerText="DOWNLOADED!";
-                b.style.backgroundColor="#28a745";
-                b.style.color="#fff";
-                b.style.boxShadow="0 6px 0 #1e7e34";
-
-                setTimeout(()=>{
-                    b.innerText=t;
-                    b.style.backgroundColor="#d11111";
-                    b.style.boxShadow="0 6px 0 #8a0b0b";
-                },2000);
-
-            },100);
-
-        }
-
-    </script>
 </body>
 </html>
