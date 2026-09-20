@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Imposter.exe - Admin Terminal</title>
+    <title>Imposter.exe - Electrical</title>
     <style>
         /* Base Reset */
         * {
@@ -12,146 +12,120 @@
             box-sizing: border-box;
         }
 
-        /* Deep Ship Interior Background */
+        /* Dark, shadowy Electrical Room background */
         body {
-            background-color: #0b0f19; /* Dark Navy */
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-color: #080808;
+            background-image: radial-gradient(circle at 50% -20%, #2a2a35 0%, #050505 80%);
             color: #ffffff;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 15px;
+            padding: 20px;
             overflow: hidden;
         }
 
-        /* The In-Game Tablet Device */
-        .tablet-device {
-            background: #2a2d34; /* physical tablet color */
-            border-radius: 30px;
-            padding: 15px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 5px 10px rgba(255,255,255,0.1);
+        /* Industrial Metallic Panel */
+        .hazard-panel {
+            background: #151515;
+            border: 6px solid #444;
+            border-radius: 8px;
             width: 100%;
             max-width: 550px;
-        }
-
-        /* The Screen inside the tablet */
-        .screen {
-            background: #050a10;
-            border-radius: 15px;
-            padding: 40px 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.8);
             position: relative;
             overflow: hidden;
             text-align: center;
-            border: 2px solid #00ffff; /* Neon Cyan border */
-            box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
         }
 
-        /* Retro CRT Scanline Effect */
-        .scanlines {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* CSS Hazard Stripes (Zero Images Needed) */
+        .hazard-stripes {
+            height: 30px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0,0,0,0.2) 50%,
-                rgba(0,0,0,0.2)
+            background: repeating-linear-gradient(
+                45deg,
+                #ffcc00,
+                #ffcc00 15px,
+                #111111 15px,
+                #111111 30px
             );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 5;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        /* Title: Sabotage Orange */
+        .content-area {
+            padding: 40px 20px;
+        }
+
+        /* Title: High Voltage Yellow with Flicker Animation */
         h1 {
-            color: #ff8c00;
-            font-size: clamp(1.8rem, 6vw, 3rem);
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Main Text: Electric Cyan */
-        h2 {
-            color: #00ffff;
-            font-size: clamp(1.4rem, 5vw, 2rem);
+            color: #ffcc00;
+            font-size: clamp(2rem, 6vw, 3.2rem);
             text-transform: uppercase;
-            margin-bottom: 25px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-            position: relative;
-            z-index: 10;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+            animation: flicker 4s infinite;
         }
 
-        /* New Caption: Terminal White/Grey */
+        /* Main Text: Electric Blue */
+        h2 {
+            color: #33ccff;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(51, 204, 255, 0.5);
+        }
+
+        /* Electrical Caption Text */
         p {
-            color: #d1d5db;
-            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-            line-height: 1.6;
-            margin-bottom: 40px;
+            color: #a0a0a0;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            line-height: 1.5;
+            margin-bottom: 35px;
             padding: 0 15px;
-            position: relative;
-            z-index: 10;
         }
 
         /* Screenshot Instruction Text */
         .screenshot-text {
-            color: #00ffff;
-            font-size: 1.1rem;
+            color: #ff3333; /* Emergency Red */
+            font-size: 1.2rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
-            position: relative;
-            z-index: 10;
-            animation: pulse-text 2s infinite;
+            animation: pulse-alert 2s infinite;
         }
 
-        /* Blinking cursor effect */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2rem;
-            background-color: #00ffff;
-            vertical-align: middle;
-            animation: blink 1s step-end infinite;
-            margin-left: 5px;
+        /* Broken Neon Tube Animation */
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; text-shadow: 0 0 15px rgba(255, 204, 0, 0.4); }
+            20%, 24%, 55% { opacity: 0.3; text-shadow: none; }
         }
 
-        /* Animations */
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8); }
+        /* Pulse Animation for Screenshot Text */
+        @keyframes pulse-alert {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255, 51, 51, 0.8); }
             50% { opacity: 0.5; text-shadow: none; }
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="tablet-device">
-        <div class="screen">
-            <div class="scanlines"></div>
-            
+    <div class="hazard-panel">
+        <!-- Top Caution Stripes -->
+        <div class="hazard-stripes"></div>
+        
+        <div class="content-area">
             <h1>Imposter.exe</h1>
             <h2>Task Completed</h2>
             
-            <!-- New Caption -->
-            <p>Data upload successful. Your innocence is verified... for now.<span class="cursor"></span></p>
+            <!-- Electrical Theme Caption -->
+            <p>Task finished. Trust index increased by 0.1%.<br>Proceed with caution.</p>
             
-            <div class="screenshot-text">[ PLEASE TAKE A SCREENSHOT ]</div>
+            <div class="screenshot-text">PLEASE TAKE A SCREENSHOT</div>
         </div>
+
+        <!-- Bottom Caution Stripes -->
+        <div class="hazard-stripes"></div>
     </div>
 
 </body>
